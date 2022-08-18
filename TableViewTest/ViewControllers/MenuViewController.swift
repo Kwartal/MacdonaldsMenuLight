@@ -14,16 +14,9 @@ class MenuViewController: UIViewController {
     
     //MARK: - UI Elements
     
-    private lazy var searchBar: UISearchBar = {
-        var searchBar = UISearchBar()
-        return searchBar
-    }()
+    private lazy var searchBar = UISearchBar()
     
-    private lazy var menuTableView: UITableView = {
-        var tableView = UITableView()
-        return tableView
-    }()
-    
+    private lazy var menuTableView = UITableView()
     
     //MARK: - Lifecycle
     override func viewDidLoad() {
@@ -31,6 +24,7 @@ class MenuViewController: UIViewController {
         addSubviews()
         setupSubviews()
         configureConstraints()
+        configureTableView()
     }
     
     private func configureTableView() {
@@ -45,11 +39,20 @@ extension MenuViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        <#code#>
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: MenuItemTableViewCell.identifier, for: indexPath) as? MenuItemTableViewCell else { return UITableViewCell()}
+        cell.configureWithViewModel(menuItem: menuItemsArray[indexPath.row])
+        return cell
     }
     
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 100
+    }
     
-    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let vc = MenuItemViewController(menuItem: menuItemsArray[indexPath.row])
+        vc.modalPresentationStyle = .popover
+        present(vc, animated: true)
+    }
 }
 // MARK: - Layout
 extension MenuViewController {
@@ -59,26 +62,22 @@ extension MenuViewController {
         view.addSubview(menuTableView)
     }
     
-    
     private func setupSubviews() {
-        view.backgroundColor = .magenta.withAlphaComponent(0.7)
+        view.backgroundColor = .white
         
         searchBar.placeholder = "Введите название блюда"
-        
-        
     }
     
     private func configureConstraints() {
-        
         searchBar.snp.makeConstraints {
             $0.trailing.leading.equalToSuperview().inset(16)
             $0.top.equalToSuperview().offset(60)
         }
         
         menuTableView.snp.makeConstraints {
-            $0.trailing.leading.equalToSuperview().inset(16)
+            $0.trailing.leading.equalToSuperview()
             $0.top.equalTo(searchBar.snp.bottom).offset(26)
-            $0.size.equalTo(500)
+            $0.bottom.equalToSuperview()
         }
         
     }
