@@ -133,7 +133,9 @@ extension MenuItemViewController {
     private func configureConstraints() {
         itemImageView.snp.makeConstraints {
             $0.trailing.leading.equalToSuperview()
-            $0.size.lessThanOrEqualTo(UIScreen.main.bounds.width * 0.7)
+            $0.top.equalToSuperview().offset(5)
+            $0.size.equalTo(400)
+//            $0.size.lessThanOrEqualTo(UIScreen.main.bounds.width * 0.7)
         }
         
         descriptionView.snp.makeConstraints {
@@ -148,7 +150,7 @@ extension MenuItemViewController {
         nameLabel.snp.makeConstraints {
             $0.leading.equalToSuperview().inset(16)
             $0.top.equalTo(descriptionView.snp.bottom).offset(14)
-        }
+        
         
         weightLabel.snp.makeConstraints {
             $0.leading.equalTo(nameLabel.snp.trailing).offset(6)
@@ -190,7 +192,6 @@ extension MenuItemViewController {
             $0.trailing.equalTo(plusNumberOfItemButton.snp.leading)
             $0.top.bottom.equalToSuperview()
             $0.width.equalTo(30)
-
         }
         
         plusNumberOfItemButton.snp.makeConstraints {
@@ -202,3 +203,5 @@ extension MenuItemViewController {
     }
     
 }
+}
+

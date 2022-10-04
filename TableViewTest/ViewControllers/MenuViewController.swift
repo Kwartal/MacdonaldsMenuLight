@@ -33,6 +33,7 @@ class MenuViewController: UIViewController {
         menuTableView.dataSource = self
     }
 }
+
 extension MenuViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         menuItemsArray.count
@@ -53,6 +54,7 @@ extension MenuViewController: UITableViewDataSource, UITableViewDelegate {
         vc.modalPresentationStyle = .popover
         present(vc, animated: true)
     }
+        
 }
 // MARK: - Layout
 extension MenuViewController {
@@ -79,8 +81,5 @@ extension MenuViewController {
             $0.top.equalTo(searchBar.snp.bottom).offset(26)
             $0.bottom.equalToSuperview()
         }
-        
     }
-    
-    
 }

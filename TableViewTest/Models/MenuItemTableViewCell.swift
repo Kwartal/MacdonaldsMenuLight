@@ -22,7 +22,6 @@ final class MenuItemTableViewCell: UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        
         selectionStyle = .none
         contentView.backgroundColor = .white
         setupSubviews()
@@ -38,7 +37,6 @@ final class MenuItemTableViewCell: UITableViewCell {
         self.menuItemTitleLabel.text = menuItem.name
         self.menuItemImageView.image = UIImage(named: menuItem.imageName)
     }
-    
 }
 
 // MARK: - Layout
@@ -64,6 +62,5 @@ extension MenuItemTableViewCell {
             $0.size.equalTo(80)
             $0.leading.equalToSuperview().offset(16)
         }
-        
     }
 }
